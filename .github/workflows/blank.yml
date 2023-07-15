@@ -1,0 +1,31 @@
+name: Run WildCrawl
+
+on:
+  workflow_dispatch:
+    inputs:
+      website:
+        description: 'Website to scan'
+        required: true
+
+jobs:
+  wildcrawl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Go environment
+        uses: actions/setup-go@v2
+
+      - name: Install WildCrawl
+        run: |
+          git clone https://github.com/NeverWonderLand/wildcrawl.git
+          cd wildcrawl
+          chmod +x install.sh
+          ./install.sh
+          chmod +x wildcrawl.sh
+
+      - name: Run WildCrawl script
+        run: ./wildcrawl/wildcrawl.sh ${{ github.event.inputs.website }}
+

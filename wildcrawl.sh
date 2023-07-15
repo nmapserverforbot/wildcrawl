@@ -26,8 +26,9 @@ echo -e " $BLUE ___________+_____________/\________+_____WILDCRAWL_______/\__+__
 echo -e " $BLUE ___+___________/\______________/\______________+__________/\___________\n\n" $RESET
 
 
-echo -e "[x] Enter the URL to scan:"
-read URL
+
+URL=$1
+
 domain=$(extract_domain "$URL")
 counter=1
 dir_name="$domain"
